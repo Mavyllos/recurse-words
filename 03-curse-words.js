@@ -39,11 +39,14 @@ const comments = [
   }
 ]
 
-function censorComments (comments, curses) {
-  comments.forEach(comment => {
+function censorComments (comments, curses, i=0) {
+  const comment = comments[i]
+
+  if (comment) {
     comment.content = censor(comment.content, curses)
     if (comment.replies.length) censorComments(comment.replies, curses)
-  })
+    censorComments(comments, curses, i+1)
+  }
 
   return comments
 }

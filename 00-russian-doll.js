@@ -7,11 +7,7 @@ const russianDoll = [[[[[[[[['🇷🇺']]]]]]]]]
 
 function open (nested) {
   const item = nested[0]
-  if (Array.isArray(item)) {
-    return open(item)
-  } else {
-    return item
-  }
+  return Array.isArray(item) ? open(item) : item
 }
 
 console.log(open(russianDoll))
