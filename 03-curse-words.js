@@ -38,3 +38,24 @@ const comments = [
     replies: []
   }
 ]
+
+function censorComments (comments, curses) {
+  comments.forEach(comment => {
+    comment.content = censor(comment.content, curses)
+    if (comment.replies.length) censorComments(comment.replies, curses)
+  })
+
+  return comments
+}
+
+function censor (content, curses) {
+  curses.forEach(curse => {
+    const regexp = new RegExp(curse, 'g')
+    const stars = new Array(curse.length).fill('*').join('')
+    content = content.replace(regexp, stars)
+  })
+
+  return content
+}
+
+console.dir(censorComments(comments, ['damn']), { depth: null })

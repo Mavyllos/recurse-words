@@ -5,3 +5,17 @@
 */
 
 const box = [['🔬',['⛸', '🏓', '🏉'], '📕', ['🎷'], '🔑'],[[]],'💡']
+
+function unpack (box, result=[]) {
+  box.forEach(item => {
+    if (Array.isArray(item)) {
+      unpack(item, result)
+    } else {
+      result.push(item)
+    }
+  })
+
+  return result
+}
+
+console.log(unpack(box))
